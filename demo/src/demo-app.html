@@ -59,6 +59,11 @@
     <div class="s12">
       <a id="account-trigger" class="btn tonal" md-dropdown="activates: account-menu; cover-trigger.bind: false"
          md-on-open-end.trigger="log('dropdown open')" md-on-close-end.trigger="log('dropdown closed')">Account</a>
+      <md-dropdown if.bind="isSelectVisible" id="reports-menu" class="tonal" title="Reports" cover-trigger.bind="false"
+                   md-on-open-end.trigger="log('reports open')" md-on-close-end.trigger="log('reports closed')">
+        <li><a id="reports-sales" click.trigger="log('sales chosen')">Sales</a></li>
+        <li><a click.trigger="log('stock chosen')">Stock</a></li>
+      </md-dropdown>
       <button type="button" id="delete-button" class="btn outlined" md-tooltip="html.bind: tooltipText; position: top">Delete</button>
       <button type="button" id="open-modal" class="btn tonal" click.trigger="confirmation.open()">Open modal</button>
       <button type="button" id="show-toast" class="btn tonal" click.trigger="showToast()">Show toast</button>

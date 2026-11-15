@@ -1,14 +1,12 @@
 import { bindable, customAttribute, INode, resolve } from "aurelia";
 import * as M from "@materializecss/materialize";
-import { optionalBoolean, optionalNumber } from "../common/boolean-attribute";
-import { fireMaterializeEvent } from "../common/fire-event";
-import { type DropdownOptions, givenOptions } from "../common/materialize-options";
+import { createDropdown, type DropdownBindables } from "./create-dropdown";
 
 // Makes an element open a Materialize dropdown, the list given by id or by reference:
 //   <a md-dropdown="activates: account-menu" class="btn tonal">Account</a>
 //   <ul id="account-menu"> <li><a>Profile</a></li> </ul>
 @customAttribute("md-dropdown")
-export class MdDropdown
+export class MdDropdown implements DropdownBindables
 {
   private static nextId: number = 0;
 
@@ -50,24 +48,7 @@ export class MdDropdown
     this.trigger.setAttribute("data-target", this.activates);
     this.content.classList.add("dropdown-content");
 
-    const container = typeof this.container == "string" ? document.querySelector(this.container) : this.container;
-
-    this.instance = M.Dropdown.init(this.trigger, {
-      ...givenOptions<DropdownOptions>({
-        alignment: this.alignment,
-        constrainWidth: optionalBoolean(this.constrainWidth),
-        container: container ?? undefined,
-        coverTrigger: optionalBoolean(this.coverTrigger),
-        closeOnClick: optionalBoolean(this.closeOnClick),
-        hover: optionalBoolean(this.hover),
-        inDuration: optionalNumber(this.inDuration),
-        outDuration: optionalNumber(this.outDuration)
-      }),
-      onOpenStart: () => fireMaterializeEvent(this.trigger, "open-start"),
-      onOpenEnd: () => fireMaterializeEvent(this.trigger, "open-end"),
-      onCloseStart: () => fireMaterializeEvent(this.trigger, "close-start"),
-      onCloseEnd: () => fireMaterializeEvent(this.trigger, "close-end")
-    });
+    this.instance = createDropdown(this.trigger, this);
   }
 
   public detaching(): void

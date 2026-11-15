@@ -73,7 +73,8 @@ In Aurelia 2 the reference to an attribute's class is `<name>.ref`, and to an el
 
 ## md-dropdown
 
-- The attribute is kept. The `<md-dropdown>` element is not available yet.
+- Both the attribute and the `<md-dropdown>` element are kept.
+- In the element, the items go in a `ul.dropdown-content` (it was a `div`): put `<li>` elements directly inside `<md-dropdown>`. The element itself is still the button, so your classes on it (`tonal`, `filled`) style the button.
 - `auto-trigger` and `md-title` are removed: Materialize 2 has no such options.
 
 ## md-sidenav

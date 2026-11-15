@@ -394,22 +394,36 @@ The button with the classes `modal-action default` is the one pressed when the u
 
 ### md-dropdown
 
-Makes an element open a menu. The menu is a list anywhere in the same template, pointed to by its `id`.
+A menu that opens from a button. There are two ways to write it.
+
+**As an element**, when a simple button is enough. The element is the button; its items go between the tags:
 
 ```html
-<a class="btn tonal" md-dropdown="activates: account-menu">Account</a>
+<md-dropdown title="Account" class="tonal">
+  <li><a click.trigger="openProfile()">Profile</a></li>
+  <li class="divider" tabindex="-1"></li>
+  <li><a click.trigger="signOut()">Sign out</a></li>
+</md-dropdown>
+```
+
+**As an attribute**, when the menu opens from an element of your own, such as an icon or a link in the top bar. The menu is then a list anywhere in the same template, pointed to by its `id`:
+
+```html
+<a md-dropdown="activates: account-menu" aria-label="Account"><i class="material-icons">account_circle</i></a>
 
 <ul id="account-menu">
   <li><a click.trigger="openProfile()">Profile</a></li>
-  <li class="divider" tabindex="-1"></li>
   <li><a click.trigger="signOut()">Sign out</a></li>
 </ul>
 ```
 
+The options are the same for both, except the first three:
+
 | Option | What it does |
 |---|---|
-| `activates` | The `id` of the list. |
-| `ref` | The list itself, instead of its `id`: `ref.bind: menuList`. |
+| `title` | Element only: the text of the button. |
+| `activates` | Attribute only: the `id` of the list. |
+| `ref` | Attribute only: the list itself, instead of its `id` (`ref.bind: menuList`). |
 | `cover-trigger` | `false` opens the menu under the element instead of over it. |
 | `alignment` | `left` or `right`. |
 | `hover` | Opens when the pointer is over the element. |
@@ -675,7 +689,7 @@ Aurelia
 - In the time picker, the hour cannot be typed as `00` or with a leading zero. Choosing it on the clock works.
 - On a screen 320 pixels wide, the calendar is a little wider than its box and scrolls sideways.
 
-**Not available yet,** compared with the original bridge: the `<md-dropdown>` element (the `md-dropdown` attribute is), and the components outside this first set (autocomplete, chips, carousel, collection, file input, range, and others).
+**Not available yet,** compared with the original bridge: the components outside this first set (autocomplete, chips, carousel, collection, file input, range, and others).
 
 **Not tried yet:** `md-tabs` inside a screen reached through `@aurelia/router`. The tab links are marked `external` so that the router leaves them alone, but this was not seen working with the router.
 

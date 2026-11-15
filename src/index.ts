@@ -6,6 +6,7 @@ import { MdCollapsible } from "./collapsible/md-collapsible";
 import { IMaterializeBridgeOptions, MaterializeBridgeOptions } from "./configuration";
 import { MdDatepicker } from "./datepicker/md-datepicker";
 import { MdDropdown } from "./dropdown/md-dropdown";
+import { MdDropdownElement } from "./dropdown/md-dropdown-element";
 import { MdInput } from "./input/md-input";
 import { MdModal } from "./modal/md-modal";
 import { MdNavbar } from "./navbar/md-navbar";
@@ -26,13 +27,13 @@ export { type DatepickerOptions, type FormSelectOptions, type TimepickerOptions 
 export { IMaterializeBridgeOptions, MaterializeBridgeOptions };
 export
 {
-  MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdInput, MdModal, MdNavbar, MdPagination, MdProgress,
-  MdRadio, MdSelect, MdSidenav, MdSidenavCollapse, MdSwitch, MdTabs, MdTimepicker, MdToastService, MdTooltip
+  MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdInput, MdModal, MdNavbar, MdPagination,
+  MdProgress, MdRadio, MdSelect, MdSidenav, MdSidenavCollapse, MdSwitch, MdTabs, MdTimepicker, MdToastService, MdTooltip
 };
 
 const components = [
-  MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdInput, MdModal, MdNavbar, MdPagination, MdProgress,
-  MdRadio, MdSelect, MdSidenav, MdSidenavCollapse, MdSwitch, MdTabs, MdTimepicker, MdTooltip
+  MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdInput, MdModal, MdNavbar, MdPagination,
+  MdProgress, MdRadio, MdSelect, MdSidenav, MdSidenavCollapse, MdSwitch, MdTabs, MdTimepicker, MdTooltip
 ];
 
 // Registers every component of the bridge: Aurelia.register(MaterializeBridge).
