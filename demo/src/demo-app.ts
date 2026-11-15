@@ -20,6 +20,7 @@ export class DemoApp
   public events: string[] = [];
   public tooltipText: string = "Deletes the record";
   public isBusy: boolean = false;
+  public nickname: string = "";
   public progress: number = 25;
   public page: number = 1;
   // A grey rectangle, so the demo needs no image file.

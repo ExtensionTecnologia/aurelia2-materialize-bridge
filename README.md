@@ -232,6 +232,7 @@ A text field, or a text area.
 | `disabled`, `readonly` | As on an `<input>`. |
 | `inline` | The field takes only the width it needs, so it can sit in a line of text. |
 | `blur-on-enter` | Pressing Enter leaves the field. |
+| `update-trigger` | When what was typed is passed on to `value`. It is at every keystroke when not given; `update-trigger="blur"` waits until the user leaves the field. Up to three event names, as text (`"blur, change"`) or as a list (`update-trigger.bind="['blur']"`). |
 | `show-errortext` | `false` hides the validation message. |
 
 It announces `focus` and `blur`. From code, `focus()` puts the cursor in it.
@@ -674,7 +675,7 @@ Aurelia
 - In the time picker, the hour cannot be typed as `00` or with a leading zero. Choosing it on the clock works.
 - On a screen 320 pixels wide, the calendar is a little wider than its box and scrolls sideways.
 
-**Not available yet,** compared with the original bridge: the `<md-dropdown>` element (the `md-dropdown` attribute is), `update-trigger` on `md-input`, and the components outside this first set (autocomplete, chips, carousel, collection, file input, range, and others).
+**Not available yet,** compared with the original bridge: the `<md-dropdown>` element (the `md-dropdown` attribute is), and the components outside this first set (autocomplete, chips, carousel, collection, file input, range, and others).
 
 **Not tried yet:** `md-tabs` inside a screen reached through `@aurelia/router`. The tab links are marked `external` so that the router leaves them alone, but this was not seen working with the router.
 

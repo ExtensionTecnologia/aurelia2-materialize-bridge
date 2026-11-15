@@ -185,6 +185,40 @@ describe("md-input attributes", () =>
     expect(blur).toHaveBeenCalledOnce();
   });
 
+  it("waits for the events given in update-trigger before passing on what was typed", async () =>
+  {
+    class Search { public text: string = ""; }
+    const view = await createFixture(`<md-input id="search" label="Search" update-trigger.bind="['blur']" value.bind="text"></md-input>`, Search, [MaterializeBridge]).started;
+
+    view.type("#search input", "ana");
+    expect(view.component.text).toBe("");
+
+    view.trigger("#search input", "blur");
+    expect(view.component.text).toBe("ana");
+  });
+
+  it("accepts update-trigger as text, and applies it to a text area too", async () =>
+  {
+    class Search { public text: string = ""; }
+    const view = await createFixture(`<md-input id="search" label="Search" text-area update-trigger="blur, change" value.bind="text"></md-input>`, Search, [MaterializeBridge]).started;
+
+    view.type("#search textarea", "ana");
+    expect(view.component.text).toBe("");
+
+    view.trigger("#search textarea", "change");
+    expect(view.component.text).toBe("ana");
+  });
+
+  it("still shows a value set from code when update-trigger is given", async () =>
+  {
+    class Search { public text: string = "first"; }
+    const view = await createFixture(`<md-input id="search" label="Search" update-trigger.bind="['blur']" value.bind="text"></md-input>`, Search, [MaterializeBridge]).started;
+
+    view.assertValue("#search input", "first");
+    view.component.text = "second";
+    await vi.waitFor(() => view.assertValue("#search input", "second"));
+  });
+
   it("takes only the width it needs when inline", async () =>
   {
     class Search { public isInline: boolean = true; }

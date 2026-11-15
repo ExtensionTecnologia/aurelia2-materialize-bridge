@@ -1,11 +1,11 @@
 <fieldset class="form-field" disabled.bind="disabled">
   <legend>${label}</legend>
-  <input if.bind="!textArea" ref="input" aria-label.bind="label" type.bind="type" value.bind="value"
+  <input if.bind="!textArea" ref="input" aria-label.bind="label" type.bind="type" value.bind="value & updateTrigger:updateEvents[0]:updateEvents[1]:updateEvents[2]"
          name.attr="name" placeholder.attr="placeholder" autocomplete.attr="autocomplete"
          min.attr="min" max.attr="max" step.attr="step" maxlength.attr="maxlength"
          disabled.bind="disabled" readonly.bind="readonly"
          focus.trigger="onFocus()" blur.trigger="onBlur()" keyup.trigger="onKeyup($event)">
-  <textarea else ref="input" aria-label.bind="label" rows="4" value.bind="value"
+  <textarea else ref="input" aria-label.bind="label" rows="4" value.bind="value & updateTrigger:updateEvents[0]:updateEvents[1]:updateEvents[2]"
             name.attr="name" placeholder.attr="placeholder" maxlength.attr="maxlength"
             disabled.bind="disabled" readonly.bind="readonly"
             focus.trigger="onFocus()" blur.trigger="onBlur()"></textarea>

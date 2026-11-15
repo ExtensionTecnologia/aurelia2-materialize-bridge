@@ -27,7 +27,7 @@ Requires `aurelia` 2.0.0-rc.2 and `@materializecss/materialize` 2.3.x. Materiali
 |---|---|
 | `label` | no longer two-way |
 | `validate`, `validate-error`, `validate-success` | removed: they drove the `.input-field` helper text, which the outlined field does not have. Use `@aurelia/validation` |
-| `update-trigger` | not available yet |
+| `update-trigger` | kept. It also accepts the events as text: `update-trigger="blur"`. At most three events, as in the original |
 | `maxlength` | no default (was 524288, the browser's own limit) |
 | `text-area` | renders a plain `textarea` with four rows that the user can resize; it does not grow by itself |
 

@@ -28,8 +28,26 @@ export class MdInput
   @bindable({ set: booleanAttribute }) public textArea: boolean = false;
   @bindable({ set: booleanAttribute }) public blurOnEnter: boolean = false;
   @bindable({ set: booleanAttribute }) public showErrortext: boolean = true;
+  // The events of the field that pass what was typed on to value: ["blur"] waits until the user leaves
+  // the field. Also accepted as text: "blur", or "input, change". Read once, when the field appears.
+  @bindable public updateTrigger: string[] | string = ["input", "change"];
   // Lets the field sit in a line of text or beside other fields, instead of taking the whole width.
   @bindable({ set: booleanAttribute }) public inline: boolean = false;
+
+  // The update events for the template, which needs exactly three: the last one is repeated to fill
+  // the list, and listening twice to the same event does nothing more than listening once.
+  public get updateEvents(): string[]
+  {
+    const given = typeof this.updateTrigger == "string" ? this.updateTrigger.split(/[\s,]+/) : this.updateTrigger;
+    const events = given.filter(event => event != "").slice(0, 3);
+    if (events.length == 0)
+      events.push("input", "change");
+
+    while (events.length < 3)
+      events.push(events[events.length - 1]);
+
+    return events;
+  }
 
   public binding(): void
   {

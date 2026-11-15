@@ -128,6 +128,8 @@
     <md-input class="s12 m6" id="person-code" label="Code (always disabled)" value="A-001" disabled></md-input>
     <md-input class="s12" id="person-notes" label="Notes" text-area value.bind="person.notes" disabled.bind="isDisabled" readonly.bind="isReadonly"></md-input>
 
+    <md-input class="s12 m6" id="person-nickname" label="Nickname (passed on when you leave the field)" update-trigger.bind="['blur']" value.bind="nickname"></md-input>
+    <p class="s12 m6 body-medium" id="nickname-shown">Nickname: ${nickname}</p>
     <p class="s12 body-medium" id="inline-line">
       Inline: remind me <md-input id="reminder-days" label="Days" type="number" inline value="3"></md-input> days before.
     </p>
