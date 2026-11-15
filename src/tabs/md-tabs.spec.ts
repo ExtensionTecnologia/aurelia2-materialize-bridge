@@ -48,6 +48,18 @@ describe("md-tabs", () =>
     expect(view.getAllBy("#tabs a[external]").length).toBe(2);
   });
 
+  it("waits for tabs made by repeat.for before building the widget", async () =>
+  {
+    const tabs = fakeTabs();
+    class Sections { public names: string[] = ["summary", "details", "history"]; }
+    const repeated = `<ul id="tabs" md-tabs><li repeat.for="name of names"><a href="#\${name}">\${name}</a></li></ul>
+                      <div repeat.for="name of names" id.bind="name">\${name}</div>`;
+    const view = await createFixture(repeated, Sections, [MaterializeBridge]).started;
+
+    await vi.waitFor(() => expect(tabs.init).toHaveBeenCalledOnce());
+    expect(view.getAllBy("#tabs li.tab").length).toBe(3);
+  });
+
   it("builds the widget with the given options only", async () =>
   {
     const tabs = fakeTabs();

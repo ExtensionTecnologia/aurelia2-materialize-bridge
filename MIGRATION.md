@@ -84,7 +84,7 @@ In Aurelia 2 the reference to an attribute's class is `<name>.ref`, and to an el
 
 ## md-tabs
 
-- The links get the `external` attribute, which tells `@aurelia/router` not to take `href="#tab"` for a route.
+- Works in a screen reached through `@aurelia/router` with no change to the links: the bridge marks them `external` and makes the router leave them as written.
 - `select(id)` announces `md-on-selected` once, through the click Materialize makes on the tab.
 
 ## md-collapsible

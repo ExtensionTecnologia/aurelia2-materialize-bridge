@@ -1,9 +1,10 @@
 import Aurelia from "aurelia";
+import { RouterConfiguration } from "@aurelia/router";
 import { ValidationHtmlConfiguration, ValidationTrigger } from "@aurelia/validation-html";
 import { MaterializeBridge } from "aurelia2-materialize-bridge";
 import { MaterializeBridgeValidation } from "aurelia2-materialize-bridge/validation";
 import "@materializecss/materialize/dist/css/materialize.min.css";
-import { DemoApp } from "./demo-app";
+import { DemoShell } from "./demo-shell";
 
 const Validation = ValidationHtmlConfiguration.customize(options =>
 {
@@ -18,6 +19,6 @@ const Bridge = MaterializeBridge.customize(options =>
 });
 
 Aurelia
-  .register(Bridge, MaterializeBridgeValidation, Validation)
-  .app({ host: document.querySelector("demo-app") as HTMLElement, component: DemoApp })
+  .register(RouterConfiguration, Bridge, MaterializeBridgeValidation, Validation)
+  .app({ host: document.querySelector("demo-shell") as HTMLElement, component: DemoShell })
   .start();

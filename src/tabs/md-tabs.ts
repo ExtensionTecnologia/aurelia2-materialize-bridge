@@ -1,4 +1,4 @@
-import { bindable, customAttribute, INode, resolve } from "aurelia";
+import { bindable, CustomAttribute, customAttribute, INode, resolve } from "aurelia";
 import * as M from "@materializecss/materialize";
 import { booleanAttribute, optionalBoolean, optionalNumber } from "../common/boolean-attribute";
 import { fireMaterializeEvent } from "../common/fire-event";
@@ -12,6 +12,7 @@ export class MdTabs
 {
   private readonly list = resolve(INode) as HTMLElement;
   private instance: M.Tabs | null = null;
+  private isAttached: boolean = false;
 
   // Tabs share the whole width equally.
   @bindable({ set: booleanAttribute }) public fixed: boolean = false;
@@ -24,11 +25,20 @@ export class MdTabs
     this.list.classList.add("tabs");
     this.fixedChanged();
     this.transparentChanged();
-    this.createWidget();
+    this.isAttached = true;
+
+    // Tabs and contents made by repeat.for arrive just after this list is attached, and Materialize
+    // needs them all when it builds the tabs. So the tabs are built once the rest of the template is in place.
+    queueMicrotask(() =>
+    {
+      if (this.isAttached)
+        this.createWidget();
+    });
   }
 
   public detaching(): void
   {
+    this.isAttached = false;
     this.destroyWidget();
     this.list.classList.remove("tabs", "tabs-fixed-width", "tabs-transparent");
   }
@@ -75,10 +85,9 @@ export class MdTabs
     for (const tab of this.list.querySelectorAll("li"))
       tab.classList.add("tab");
 
-    for (const link of this.list.querySelectorAll("li a"))
+    for (const link of this.list.querySelectorAll<HTMLAnchorElement>("li a"))
     {
-      // Keeps the Aurelia router from taking "#first" for a route.
-      link.setAttribute("external", "");
+      this.releaseFromRouter(link);
       link.addEventListener("click", this.onTabClick);
     }
 
@@ -89,6 +98,18 @@ export class MdTabs
       }),
       onShow: newContent => fireMaterializeEvent(this.list, "show", { newContent })
     });
+  }
+
+  // In a screen reached through @aurelia/router, the router takes every <a href> for a route: it rewrites
+  // "#first" as an address of the application and navigates on a click. A link marked "external" is left
+  // alone, but the router has already looked at the link by the time the tabs are built. So the link is
+  // marked and the router is made to look again, which also puts the address back as it was written.
+  private releaseFromRouter(link: HTMLAnchorElement): void
+  {
+    link.setAttribute("external", "");
+
+    const routerLink = CustomAttribute.for(link, "href")?.viewModel as { value?: unknown, valueChanged?: (value: unknown) => void } | undefined;
+    routerLink?.valueChanged?.(routerLink.value);
   }
 
   private destroyWidget(): void

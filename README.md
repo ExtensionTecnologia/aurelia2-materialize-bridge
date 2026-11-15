@@ -480,6 +480,8 @@ A list of links becomes the tabs. Each link points to the `id` of its content.
 
 From code: `select("details")` shows a tab, `selectedTab` is the position of the one on show (from 0), and `refresh()` rebuilds the tabs after you add or remove one.
 
+The tabs can come from `repeat.for`. They also work in a screen reached through `@aurelia/router`, with nothing to add to the links.
+
 It announces `md-on-selected` (the link's `href`, such as `#details`, is in `$event.detail`) and `md-on-show` (the content shown is in `$event.detail.newContent`).
 
 ### md-collapsible
@@ -691,7 +693,7 @@ Aurelia
 
 **Not available yet,** compared with the original bridge: the components outside this first set (autocomplete, chips, carousel, collection, file input, range, and others).
 
-**Not tried yet:** `md-tabs` inside a screen reached through `@aurelia/router`. The tab links are marked `external` so that the router leaves them alone, but this was not seen working with the router.
+**Links inside a page, with `@aurelia/router`.** In a screen reached through the router, the router takes every `<a href>` for a route, also `href="#section"`. `md-tabs` takes care of its own links. For a link of your own that only moves inside the page, add `external`: `<a href="#section" external>`.
 
 ## Working on the bridge
 

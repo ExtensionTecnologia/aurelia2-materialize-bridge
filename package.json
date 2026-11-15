@@ -38,6 +38,7 @@
     }
   },
   "devDependencies": {
+    "@aurelia/router": "2.0.0-rc.2",
     "@aurelia/testing": "2.0.0-rc.2",
     "@aurelia/validation": "2.0.0-rc.2",
     "@aurelia/validation-html": "2.0.0-rc.2",

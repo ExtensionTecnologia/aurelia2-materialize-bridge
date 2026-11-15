@@ -8,7 +8,8 @@ Este projeto visa portar o aurelia-materialize-bridge original para o Aurelia 2 
 - Cada Componente fica em `src/<nome>/md-<nome>.ts`, `.html` e `.spec.ts` (mais `.css` só quando o MaterializeCSS não cobre), e é registrado em `src/index.ts`.
 - Toda diferença em relação ao Bridge original entra no `MIGRATION.md`.
 - Comandos: `npm run typecheck`, `npm test`, `npm run build`, `npm start` (app de demonstração em `demo/`, porta 9000).
-- Antes de dar um Componente por pronto, veja-o no app de demonstração num navegador real e confira o console.
+- Antes de dar um Componente por pronto, veja-o no app de demonstração num navegador real e confira o console. O app de demonstração é exibido pelo `@aurelia/router` de propósito: alguns problemas só aparecem numa tela roteada.
+- Um Componente em forma de atributo não deve ler os filhos do elemento em `attached()`: os filhos feitos por `repeat.for` chegam logo depois. Veja como o `md-select` e o `md-tabs` tratam isso.
 
 ## Referências
 Github do aurelia-materialize-bridge original: https://github.com/aurelia-ui-toolkits/aurelia-materialize-bridge
