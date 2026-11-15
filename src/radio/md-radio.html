@@ -1,0 +1,7 @@
+<label class="valign-wrapper">
+  <input if.bind="model === undefined" type="radio" class="mr-2" with-gap.class="gap" name.attr="name" value.bind="value" checked.bind="checked"
+         disabled.bind="disabled" click.trigger="onClick($event)">
+  <input else type="radio" class="mr-2" with-gap.class="gap" name.attr="name" model.bind="model" checked.bind="checked"
+         disabled.bind="disabled" click.trigger="onClick($event)">
+  <span class="body-medium"><au-slot></au-slot></span>
+</label>

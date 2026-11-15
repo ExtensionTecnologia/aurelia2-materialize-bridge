@@ -1,0 +1,187 @@
+<!-- md-sidenav, opened by md-sidenav-collapse -->
+<md-navbar id="top-bar">
+  <a id="menu-trigger" class="on-surface-text" md-sidenav-collapse="ref.bind: menu" aria-label="Open menu"><i class="material-icons">menu</i></a>
+  <a class="brand-logo">Aurelia 2 Materialize Bridge</a>
+</md-navbar>
+<md-sidenav id="menu" component.ref="menu" md-on-open-end.trigger="log('sidenav open')" md-on-close-end.trigger="log('sidenav closed')">
+  <li><a class="subheader">Components</a></li>
+  <li><a id="menu-forms" class="sidenav-close" href="#form-person" external>Form fields</a></li>
+  <li><a class="sidenav-close" href="#scripted" external>Components with script</a></li>
+</md-sidenav>
+
+<main class="container">
+  <!-- Wrappers: components that are only Materialize's markup and classes -->
+  <section id="wrappers" class="row">
+    <h2 class="s12 title-large">md-button</h2>
+    <div class="s12">
+      <button type="button" id="button-filled" class="filled" md-button>Filled</button>
+      <button type="button" id="button-tonal" class="tonal" md-button="small: true">Tonal small</button>
+      <button type="button" id="button-flat" md-button="flat: true">Flat</button>
+      <button type="button" id="button-busy" class="filled" md-button="disabled.bind: isBusy" click.trigger="log('busy button clicked')">Disabled while busy</button>
+      <a id="button-floating" class="filled" md-button="floating: true; pulse.bind: isBusy" aria-label="Add"><i class="material-icons">add</i></a>
+      <md-switch id="toggle-busy" label-off="" label-on="Busy" checked.bind="isBusy"></md-switch>
+    </div>
+
+    <h2 class="s12 title-large">md-card</h2>
+    <md-card class="s12 m4" id="card-plain" md-title="Plain card" action>
+      <p>Content of the card.</p>
+      <a au-slot="action" class="btn btn-flat">Open</a>
+    </md-card>
+    <md-card class="s12 m4" id="card-image" md-title="Card with image" image.bind="picture">
+      <p>Content under the image.</p>
+    </md-card>
+    <md-card class="s12 m4" id="card-reveal" md-title="Card with more" image.bind="picture" reveal>
+      <p>Click the title or the image.</p>
+      <p au-slot="reveal-text" id="card-reveal-text">The hidden text.</p>
+    </md-card>
+
+    <h2 class="s12 title-large">md-progress</h2>
+    <div class="s12">
+      <md-progress id="progress-value" value.bind="progress"></md-progress>
+      <md-progress id="progress-endless"></md-progress>
+      <md-progress id="spinner-big" type="circular"></md-progress>
+      <md-progress id="spinner-small" type="circular" size="small" color="red"></md-progress>
+      <md-progress id="spinner-flashing" type="circular" size="" color="flashing"></md-progress>
+      <md-progress id="spinner-pixels" type="circular" pixel-size="80" color="green"></md-progress>
+      <button type="button" id="more-progress" class="tonal" md-button click.trigger="progress = progress + 25">+25%</button>
+    </div>
+
+    <h2 class="s12 title-large">md-pagination</h2>
+    <div class="s12">
+      <md-pagination id="pages" pages="20" visible-page-links="5" active-page.bind="page" md-on-page-changed.trigger="log('page ' + $event.detail)"></md-pagination>
+      <span id="page-shown" class="body-medium">Page ${page}</span>
+    </div>
+  </section>
+
+  <!-- Components with script -->
+  <section id="scripted" class="row">
+    <h2 class="s12 title-large">md-dropdown, md-tooltip, md-modal and toast</h2>
+    <div class="s12">
+      <a id="account-trigger" class="btn tonal" md-dropdown="activates: account-menu; cover-trigger.bind: false"
+         md-on-open-end.trigger="log('dropdown open')" md-on-close-end.trigger="log('dropdown closed')">Account</a>
+      <button type="button" id="delete-button" class="btn outlined" md-tooltip="html.bind: tooltipText; position: top">Delete</button>
+      <button type="button" id="open-modal" class="btn tonal" click.trigger="confirmation.open()">Open modal</button>
+      <button type="button" id="show-toast" class="btn tonal" click.trigger="showToast()">Show toast</button>
+    </div>
+    <ul id="account-menu">
+      <li><a id="account-profile" click.trigger="log('profile chosen')">Profile</a></li>
+      <li class="divider" tabindex="-1"></li>
+      <li><a click.trigger="log('sign out chosen')">Sign out</a></li>
+    </ul>
+
+    <div id="confirmation" md-modal md-modal.ref="confirmation"
+         md-on-open-end.trigger="log('modal open')" md-on-close-end.trigger="log('modal closed')">
+      <div class="modal-header"><h4>Delete the record?</h4></div>
+      <div class="modal-content"><p>This cannot be undone.</p></div>
+      <div class="modal-footer">
+        <button type="button" id="modal-cancel" class="btn btn-flat" click.trigger="confirmation.close()">Cancel</button>
+        <button type="button" id="modal-confirm" class="btn btn-flat modal-action default" click.trigger="confirm()">Delete</button>
+      </div>
+    </div>
+
+    <h2 class="s12 title-large">md-tabs</h2>
+    <div class="s12">
+      <ul id="tabs" md-tabs="fixed.bind: true" md-tabs.ref="tabs" md-on-selected.trigger="log('tab selected ' + $event.detail)">
+        <li><a href="#tab-summary">Summary</a></li>
+        <li><a href="#tab-details">Details</a></li>
+        <li><a href="#tab-history">History</a></li>
+      </ul>
+      <div id="tab-summary" class="p-4">Summary content</div>
+      <div id="tab-details" class="p-4">Details content</div>
+      <div id="tab-history" class="p-4">History content</div>
+      <button type="button" id="select-history" class="btn tonal" click.trigger="tabs.select('tab-history')">Show History from code</button>
+    </div>
+
+    <h2 class="s12 title-large">md-collapsible</h2>
+    <div class="s12">
+      <ul id="questions" md-collapsible="accordion.bind: isAccordion" md-collapsible.ref="questions" md-on-open-end.trigger="log('section open')">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">help</i>First question</div>
+          <div class="collapsible-body"><p>First answer.</p></div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">help</i>Second question</div>
+          <div class="collapsible-body"><p>Second answer.</p></div>
+        </li>
+      </ul>
+      <button type="button" id="open-second" class="btn tonal" click.trigger="questions.open(1)">Open the second from code</button>
+      <md-switch id="toggle-accordion" label-off="" label-on="Accordion (one open at a time)" checked.bind="isAccordion"></md-switch>
+    </div>
+
+    <p id="event-log" class="s12 body-medium">Events: ${events.join(' | ')}</p>
+  </section>
+
+  <!-- States of the demo -->
+  <section id="demo-states" class="row">
+    <md-switch class="s12 m4" id="toggle-disabled" label-off="" label-on="Disabled" checked.bind="isDisabled"></md-switch>
+    <md-switch class="s12 m4" id="toggle-readonly" label-off="" label-on="Read-only" checked.bind="isReadonly"></md-switch>
+    <md-switch class="s12 m4" id="toggle-select" label-off="" label-on="Select and pickers on the page" checked.bind="isSelectVisible"></md-switch>
+  </section>
+
+  <!-- novalidate: the messages come from the validation rules, not from the browser's own bubbles -->
+  <form id="form-person" class="row" novalidate submit.trigger:prevent="save()">
+    <!-- md-input -->
+    <h2 class="s12 title-large">md-input</h2>
+    <md-input class="s12 m6" id="person-name" label="Name" value.bind="person.name & validate" disabled.bind="isDisabled" readonly.bind="isReadonly"></md-input>
+    <md-input class="s12 m6" id="person-email" label="E-mail" type="email" value.bind="person.email & validate" disabled.bind="isDisabled" readonly.bind="isReadonly"></md-input>
+    <md-input class="s12 m6" id="person-phone" label="Phone" type="tel" placeholder="(11) 99999-9999" value.bind="person.phone" disabled.bind="isDisabled" readonly.bind="isReadonly"></md-input>
+    <md-input class="s12 m6" id="person-code" label="Code (always disabled)" value="A-001" disabled></md-input>
+    <md-input class="s12" id="person-notes" label="Notes" text-area value.bind="person.notes" disabled.bind="isDisabled" readonly.bind="isReadonly"></md-input>
+
+    <p class="s12 body-medium" id="inline-line">
+      Inline: remind me <md-input id="reminder-days" label="Days" type="number" inline value="3"></md-input> days before.
+    </p>
+
+    <!-- md-select -->
+    <h2 class="s12 title-large">md-select</h2>
+    <div class="s12 m6" id="state-field">
+      <select if.bind="isSelectVisible" id="person-state" md-select="label: State; disabled.bind: isDisabled; readonly.bind: isReadonly" value.bind="person.state & validate">
+        <option value="">Choose</option>
+        <option repeat.for="state of states" value.bind="state">${state}</option>
+      </select>
+    </div>
+    <div class="s12 m6" id="languages-field">
+      <select id="person-languages" multiple md-select="label: Languages; disabled.bind: isDisabled; readonly.bind: isReadonly" value.bind="person.languages">
+        <option value="pt">Portuguese</option>
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+      </select>
+    </div>
+    <div class="s12">
+      <button type="button" id="choose-rio" class="btn tonal" click.trigger="chooseRio()">Choose Rio de Janeiro from code</button>
+      <button type="button" id="add-state" class="btn tonal" click.trigger="addState()">Add a state</button>
+    </div>
+
+    <!-- md-datepicker and md-timepicker -->
+    <h2 class="s12 title-large">md-datepicker and md-timepicker</h2>
+    <template if.bind="isSelectVisible">
+      <md-datepicker class="s12 m6" id="person-birth" label="Birth date (closes on choosing)" value.bind="person.birthDate" disabled.bind="isDisabled"
+                     md-on-select.trigger="lastSelected = $event.detail.selectedDate.toDateString()"></md-datepicker>
+      <md-datepicker class="s12 m6" id="person-contract" label="Contract date (Ok, Cancel and Clear)" auto-close.bind="false" show-clear-btn value.bind="person.contractDate & validate" disabled.bind="isDisabled"></md-datepicker>
+      <md-timepicker class="s12 m6" id="person-meeting" label="Meeting (closes on choosing)" auto-close value.bind="person.meetingTime" disabled.bind="isDisabled"></md-timepicker>
+      <md-timepicker class="s12 m6" id="person-alarm" label="Alarm (Ok, Cancel and Clear)" auto-close.bind="false" show-clear-btn value.bind="person.alarmTime & validate" disabled.bind="isDisabled"></md-timepicker>
+    </template>
+    <div class="s12">
+      <button type="button" id="choose-christmas" class="btn tonal" click.trigger="chooseChristmas()">Set 25/12/2026 08:05 from code</button>
+      <span id="picker-values" class="body-medium">${person.birthDate.toDateString()} | ${person.contractDate.toDateString()} | ${person.meetingTime} | ${person.alarmTime} | last selected: ${lastSelected}</span>
+    </div>
+
+    <!-- md-radio -->
+    <h2 class="s12 title-large">md-radio</h2>
+    <div class="s12" id="plan-field">
+      <md-radio id="plan-monthly" name="plan" value="monthly" checked.bind="person.plan" disabled.bind="isDisabled" readonly.bind="isReadonly" gap>Monthly</md-radio>
+      <md-radio id="plan-yearly" name="plan" value="yearly" checked.bind="person.plan" disabled.bind="isDisabled" readonly.bind="isReadonly" gap>Yearly</md-radio>
+    </div>
+
+    <!-- md-switch and md-checkbox -->
+    <h2 class="s12 title-large">md-switch and md-checkbox</h2>
+    <md-switch class="s12" id="person-emails" label-off="" label-on="Receive e-mails" checked.bind="person.receivesEmails" disabled.bind="isDisabled" readonly.bind="isReadonly"></md-switch>
+    <md-checkbox class="s12" id="person-terms" checked.bind="person.acceptsTerms & validate" disabled.bind="isDisabled" readonly.bind="isReadonly">I accept the terms of use</md-checkbox>
+
+    <div class="s12">
+      <button type="submit" id="save" class="btn filled">Save</button>
+      <button type="button" id="clear" class="btn btn-flat" click.trigger="clear()">Clear</button>
+    </div>
+  </form>
+  <p id="saved-message" class="body-medium" if.bind="savedMessage">${savedMessage}</p>
+</main>

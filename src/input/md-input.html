@@ -1,0 +1,16 @@
+<fieldset class="form-field" disabled.bind="disabled">
+  <legend>${label}</legend>
+  <input if.bind="!textArea" ref="input" aria-label.bind="label" type.bind="type" value.bind="value"
+         name.attr="name" placeholder.attr="placeholder" autocomplete.attr="autocomplete"
+         min.attr="min" max.attr="max" step.attr="step" maxlength.attr="maxlength"
+         disabled.bind="disabled" readonly.bind="readonly"
+         focus.trigger="onFocus()" blur.trigger="onBlur()" keyup.trigger="onKeyup($event)">
+  <textarea else ref="input" aria-label.bind="label" rows="4" value.bind="value"
+            name.attr="name" placeholder.attr="placeholder" maxlength.attr="maxlength"
+            disabled.bind="disabled" readonly.bind="readonly"
+            focus.trigger="onFocus()" blur.trigger="onBlur()"></textarea>
+</fieldset>
+<!-- Outside the fieldset: inside it the message would sit in the outlined box. -->
+<template if.bind="showErrortext">
+  <p class="label-medium error-text m-0" repeat.for="error of fieldErrors.messages">${error}</p>
+</template>

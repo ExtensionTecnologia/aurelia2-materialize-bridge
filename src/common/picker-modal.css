@@ -1,0 +1,13 @@
+/* Materialize 2.3.3 opens the dialog of a picker where it sits in the page, after everything else.
+   This puts it in the middle of the screen, whatever the scroll position. */
+dialog.display-modal[open] {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  max-height: calc(100% - 32px);
+  overflow-y: auto;
+  /* As wide as the picker inside it: on a phone, Materialize's 80% cuts off the last column of the calendar. */
+  width: fit-content;
+  max-width: calc(100% - 16px);
+}

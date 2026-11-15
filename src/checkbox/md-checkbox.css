@@ -1,0 +1,12 @@
+/* Material Design 3 error state: the box in the error colour, checked or not.
+   The :hover selectors are repeated because Materialize sets fixed colours on hover. */
+md-checkbox.invalid input[type=checkbox]:before,
+md-checkbox.invalid input[type=checkbox]:not(:disabled):hover:before {
+  border-color: var(--md-sys-color-error);
+}
+
+md-checkbox.invalid input[type=checkbox]:checked:after,
+md-checkbox.invalid input[type=checkbox]:indeterminate:after,
+md-checkbox.invalid input[type=checkbox]:not(:disabled):checked:hover:after {
+  background-color: var(--md-sys-color-error);
+}

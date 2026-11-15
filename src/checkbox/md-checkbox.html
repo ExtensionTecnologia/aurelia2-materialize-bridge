@@ -1,0 +1,6 @@
+<label class="valign-wrapper">
+  <input type="checkbox" class="mr-2" ref="checkbox" model.bind="model" matcher.bind="matcher" checked.bind="checked"
+         disabled.bind="disabled" click.trigger="onClick($event)">
+  <span class="body-medium"><au-slot></au-slot></span>
+</label>
+<p class="label-medium error-text m-0" repeat.for="error of fieldErrors.messages">${error}</p>

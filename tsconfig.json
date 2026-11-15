@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "paths": {
+      "aurelia2-materialize-bridge": ["./src/index.ts"],
+      "aurelia2-materialize-bridge/validation": ["./src/validation/index.ts"],
+      "@materializecss/materialize": ["./node_modules/@materializecss/materialize/dist/js/materialize.d.ts"]
+    }
+  },
+  "include": ["src", "test", "demo", "*.ts"],
+  "files": ["src/resource.d.ts"]
+}

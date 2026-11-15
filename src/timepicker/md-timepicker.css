@@ -1,0 +1,18 @@
+md-timepicker {
+  display: block;
+}
+
+/* Material Design 3 error state: outline and label in the error colour. */
+md-timepicker.invalid fieldset.form-field {
+  --mw-idle-color: var(--md-sys-color-error);
+  --mw-hover-color: var(--md-sys-color-on-error-container);
+  --mw-focus-color: var(--md-sys-color-error);
+}
+
+/* Materialize 2.3.3 gives the hours and minutes boxes no width, so they take the browser's default
+   (twenty characters of a very large font) and run out of the picker. */
+input[type=text].timepicker-input-hours,
+input[type=text].timepicker-input-minutes {
+  box-sizing: border-box;
+  width: 100%;
+}

@@ -1,0 +1,11 @@
+<div if.bind="type == 'linear'" class="progress" role="progressbar" aria-valuenow.attr="hasValue ? value : null">
+  <div if.bind="hasValue" class="determinate" width.style="value + '%'"></div>
+  <div else class="indeterminate"></div>
+</div>
+<div else class="preloader-wrapper ${pixelSize == null ? size : ''} active" width.style="pixels" height.style="pixels">
+  <div repeat.for="layer of layers" class="spinner-layer ${layer}">
+    <div class="circle-clipper left"><div class="circle"></div></div>
+    <div class="gap-patch"><div class="circle"></div></div>
+    <div class="circle-clipper right"><div class="circle"></div></div>
+  </div>
+</div>

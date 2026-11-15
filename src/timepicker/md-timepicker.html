@@ -1,0 +1,7 @@
+<fieldset class="form-field" disabled.bind="disabled">
+  <legend>${label}</legend>
+  <input ref="input" type="text" readonly aria-label.bind="label" placeholder.attr="placeholder" disabled.bind="disabled">
+</fieldset>
+<template if.bind="showErrortext">
+  <p class="label-medium error-text m-0" repeat.for="error of fieldErrors.messages">${error}</p>
+</template>

@@ -1,0 +1,9 @@
+<div class="switch">
+  <label>
+    ${labelOff}
+    <input type="checkbox" checked.bind="checked" disabled.bind="disabled" click.trigger="onClick($event)" blur.trigger="onBlur()">
+    <span class="lever"></span>
+    ${labelOn}
+  </label>
+</div>
+<p class="label-medium error-text m-0" repeat.for="error of fieldErrors.messages">${error}</p>

@@ -1,0 +1,21 @@
+<ul class="pagination">
+  <li if.bind="showFirstLast" class="first-page" disabled.class="activePage == 1" click.trigger="setFirstPage()">
+    <a aria-label="First page"><i class="material-icons">first_page</i></a>
+  </li>
+  <li if.bind="showPrevNext" class="previous-page" disabled.class="activePage == 1" click.trigger="setPreviousPage()">
+    <a aria-label="Previous page"><i class="material-icons">chevron_left</i></a>
+  </li>
+  <template if.bind="showPageLinks">
+    <li if.bind="pageLinks[0] > 1" class="disabled"><a>…</a></li>
+    <li repeat.for="page of pageLinks" class="page" active.class="page == activePage" click.trigger="setActivePage(page)">
+      <a>${page}</a>
+    </li>
+    <li if.bind="pageLinks[pageLinks.length - 1] < pages" class="disabled"><a>…</a></li>
+  </template>
+  <li if.bind="showPrevNext" class="next-page" disabled.class="activePage == pages" click.trigger="setNextPage()">
+    <a aria-label="Next page"><i class="material-icons">chevron_right</i></a>
+  </li>
+  <li if.bind="showFirstLast" class="last-page" disabled.class="activePage == pages" click.trigger="setLastPage()">
+    <a aria-label="Last page"><i class="material-icons">last_page</i></a>
+  </li>
+</ul>

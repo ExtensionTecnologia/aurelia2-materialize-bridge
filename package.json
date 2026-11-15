@@ -1,0 +1,53 @@
+{
+  "name": "aurelia2-materialize-bridge",
+  "version": "0.1.0",
+  "description": "MaterializeCSS 2 (Material Design 3) components for Aurelia 2. Successor of aurelia-materialize-bridge.",
+  "license": "MIT",
+  "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./validation": {
+      "types": "./dist/validation/index.d.ts",
+      "import": "./dist/validation.js"
+    },
+    "./style.css": "./dist/aurelia2-materialize-bridge.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "vite --config vite.demo.config.ts",
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "@aurelia/validation-html": "2.0.0-rc.2",
+    "@materializecss/materialize": ">=2.3.3 <2.4.0",
+    "aurelia": "2.0.0-rc.2"
+  },
+  "peerDependenciesMeta": {
+    "@aurelia/validation-html": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@aurelia/testing": "2.0.0-rc.2",
+    "@aurelia/validation": "2.0.0-rc.2",
+    "@aurelia/validation-html": "2.0.0-rc.2",
+    "@aurelia/vite-plugin": "2.0.0-rc.2",
+    "@materializecss/materialize": "2.3.3",
+    "@types/node": "^22.10.2",
+    "aurelia": "2.0.0-rc.2",
+    "jsdom": "^31.0.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.2",
+    "vite": "^7.3.1",
+    "vitest": "^5.1.0"
+  }
+}

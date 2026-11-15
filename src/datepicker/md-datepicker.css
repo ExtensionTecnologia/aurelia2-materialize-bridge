@@ -1,0 +1,10 @@
+md-datepicker {
+  display: block;
+}
+
+/* Material Design 3 error state: outline and label in the error colour. */
+md-datepicker.invalid fieldset.form-field {
+  --mw-idle-color: var(--md-sys-color-error);
+  --mw-hover-color: var(--md-sys-color-on-error-container);
+  --mw-focus-color: var(--md-sys-color-error);
+}
