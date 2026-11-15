@@ -8,7 +8,7 @@ This is the successor of [aurelia-materialize-bridge](https://github.com/aurelia
 
 ## Status
 
-Version 0.1.0. It is **not on npm yet**.
+Version 0.1.0, a first release for early use. It is published on npm under the tag `next`, so it has to be asked for by that name (see [Install](#install)).
 
 It works with exactly these versions, and nothing else has been tried:
 
@@ -36,8 +36,10 @@ MaterializeCSS 2.4 is not supported: it changes the markup of several components
 ## Install
 
 ```
-npm install aurelia2-materialize-bridge @materializecss/materialize@2.3.3
+npm install aurelia2-materialize-bridge@next @materializecss/materialize@2.3.3
 ```
+
+The `@next` asks npm for the early release. It is published that way while Aurelia 2 itself is a release candidate.
 
 Your project already has `aurelia`. If you use validation, it also has `@aurelia/validation` and `@aurelia/validation-html`; the bridge does not need them otherwise.
 

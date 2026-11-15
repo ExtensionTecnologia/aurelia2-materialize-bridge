@@ -4,6 +4,23 @@
   "description": "MaterializeCSS 2 (Material Design 3) components for Aurelia 2. Successor of aurelia-materialize-bridge.",
   "license": "MIT",
   "author": "Rodrigo Otávio",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ExtensionTecnologia/aurelia2-materialize-bridge.git"
+  },
+  "homepage": "https://github.com/ExtensionTecnologia/aurelia2-materialize-bridge#readme",
+  "bugs": {
+    "url": "https://github.com/ExtensionTecnologia/aurelia2-materialize-bridge/issues"
+  },
+  "keywords": [
+    "aurelia",
+    "aurelia2",
+    "materialize",
+    "materializecss",
+    "material-design",
+    "material-design-3",
+    "components"
+  ],
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,11 +38,15 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "tag": "next"
+  },
   "scripts": {
     "start": "vite --config vite.demo.config.ts",
     "build": "vite build && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
   },
   "peerDependencies": {
     "@aurelia/validation-html": "2.0.0-rc.2",
