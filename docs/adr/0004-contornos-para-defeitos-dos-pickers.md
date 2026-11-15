@@ -17,4 +17,4 @@ A regra geral do projeto é entregar o comportamento do MaterializeCSS como ele 
 
 - Cada contorno depende de detalhes internos da 2.3.3 (nomes de classes, métodos com `_`). Ao subir a versão do MaterializeCSS, confira um a um se o defeito ainda existe e remova o contorno que não for mais necessário.
 - O modo `docked` não tem contorno: dentro do `fieldset.form-field` a caixa é posicionada no lugar errado. O padrão do Bridge 2 é `modal`.
-- Ficam sem contorno, por serem do próprio MaterializeCSS e não impedirem o uso: não é possível digitar a hora 00 nem um zero à esquerda no timepicker, e o cabeçalho do datepicker mostra o mês abreviado em inglês.
+- Fica sem contorno, por ser do próprio MaterializeCSS e não impedir o uso: não é possível digitar a hora 00 nem um zero à esquerda no timepicker.
