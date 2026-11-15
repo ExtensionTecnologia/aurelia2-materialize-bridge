@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "MaterializeCSS 2 (Material Design 3) components for Aurelia 2. Successor of aurelia-materialize-bridge.",
   "license": "MIT",
+  "author": "Rodrigo Otávio",
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

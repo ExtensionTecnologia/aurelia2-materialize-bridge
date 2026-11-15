@@ -694,4 +694,4 @@ Each component is a folder in `src/`: the class, its template when it has one, a
 
 ## License
 
-MIT.
+[MIT](LICENSE). Copyright (c) 2026 Rodrigo Otávio.
