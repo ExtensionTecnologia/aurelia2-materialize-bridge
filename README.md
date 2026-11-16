@@ -8,7 +8,7 @@ This is the successor of [aurelia-materialize-bridge](https://github.com/aurelia
 
 ## Status
 
-Version 0.1.0, a first release for early use. It is published on npm under the tag `next`, so it has to be asked for by that name (see [Install](#install)).
+Version 0.2.0, an early release. It is published on npm under the tag `next`, so it has to be asked for by that name (see [Install](#install)).
 
 It works with exactly these versions, and nothing else has been tried:
 
@@ -238,6 +238,60 @@ A text field, or a text area.
 | `show-errortext` | `false` hides the validation message. |
 
 It announces `focus` and `blur`. From code, `focus()` puts the cursor in it.
+
+### md-autocomplete
+
+Offers a list of entries under a text field while the user types. It is an attribute for an `<md-input>` (or for a plain `<input>`), which stays a text field like any other: the label, the `value.bind` and the validation are the field's own.
+
+```html
+<md-input label="Fruit" value.bind="order.fruit" md-autocomplete="values.bind: fruits"></md-input>
+```
+```ts
+public fruits: AutocompleteEntry[] = [
+  { id: 1, text: "Apple" },
+  { id: 2, text: "Apricot", description: "Stone fruit" },
+  { id: 3, text: "Banana", image: "banana.png" }
+];
+```
+
+Only `id` is required in an entry; without `text`, the `id` is what is shown. The type `AutocompleteEntry` comes from the bridge.
+
+| Option | What it does |
+|---|---|
+| `values` | The entries to offer. Replace the list and the new entries are offered at once. |
+| `search` | A function that receives the typed text and returns the entries, at once or as a `Promise`. Use it instead of `values` to search on a server. |
+| `min-length` | How many characters before the list appears. `1` when not given; `0` shows the whole list on a click. |
+
+**The field keeps the text, not the entry.** `value` is what the user typed or chose, and a text that is not in the list is accepted. To know which entry it is, for its `id`, listen to the two events:
+
+```html
+<md-input label="Customer" value.bind="order.customerName"
+          md-autocomplete="search.bind: findCustomers; min-length: 2"
+          md-on-autocomplete.trigger="order.customerId = $event.detail.entry.id"
+          md-on-deselect.trigger="order.customerId = null"></md-input>
+```
+```ts
+public findCustomers = async (text: string): Promise<AutocompleteEntry[]> =>
+{
+  return await Customer.search(text);
+};
+```
+
+| Event | When |
+|---|---|
+| `md-on-autocomplete` | The user chose an entry, with a click or with Enter. `$event.detail` is `{ text, entry }`. |
+| `md-on-deselect` | The user edited the field and its text is no longer the one of the chosen entry. Announced once. |
+
+Typing the text of an entry by hand does not choose it, and a `value` that you change from code is not announced: clear your `id` in the same place.
+
+About `search`:
+
+- It is called at every change of the text, from `min-length` characters on. If that is too many requests, wait inside your function before asking the server.
+- While it waits, the field shows Materialize's three dots. An answer that arrives after a newer search began is thrown away.
+- If it fails, the list is emptied and the error goes to the console. To tell the user, catch the error in your function and return an empty list.
+- The bridge shows what the function returns, all of it and in that order. How many entries to offer is for the function to decide.
+
+In a read-only field the list does not open.
 
 ### md-select
 
@@ -692,8 +746,10 @@ Aurelia
 
 - In the time picker, the hour cannot be typed as `00` or with a leading zero. Choosing it on the clock works.
 - On a screen 320 pixels wide, the calendar is a little wider than its box and scrolls sideways.
+- In `md-autocomplete`, a user who leaves the field and comes back to it in less than a quarter of a second, while the list is still closing, gets no list until leaving the field again.
+- In `md-autocomplete`, choosing with a click takes the cursor out of the field.
 
-**Not available yet,** compared with the original bridge: the components outside this first set (autocomplete, chips, carousel, collection, file input, range, and others).
+**Not available yet,** compared with the original bridge: chips, carousel, collection, file input, range, and others.
 
 **Links inside a page, with `@aurelia/router`.** In a screen reached through the router, the router takes every `<a href>` for a route, also `href="#section"`. `md-tabs` takes care of its own links. For a link of your own that only moves inside the page, add `external`: `<a href="#section" external>`.
 

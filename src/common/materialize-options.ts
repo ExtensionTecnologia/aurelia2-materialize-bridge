@@ -4,6 +4,9 @@ import * as M from "@materializecss/materialize";
 export type DatepickerOptions = NonNullable<Parameters<typeof M.Datepicker.init>[1]>;
 export type TimepickerOptions = NonNullable<Parameters<typeof M.Timepicker.init>[1]>;
 export type FormSelectOptions = NonNullable<Parameters<typeof M.FormSelect.init>[1]>;
+export type AutocompleteOptions = NonNullable<Parameters<typeof M.Autocomplete.init>[1]>;
+// One entry of the list an autocomplete offers: { id, text?, image?, description? }.
+export type AutocompleteEntry = NonNullable<AutocompleteOptions["data"]>[number];
 export type DropdownOptions = NonNullable<Parameters<typeof M.Dropdown.init>[1]>;
 export type SidenavOptions = NonNullable<Parameters<typeof M.Sidenav.init>[1]>;
 export type TabsOptions = NonNullable<Parameters<typeof M.Tabs.init>[1]>;

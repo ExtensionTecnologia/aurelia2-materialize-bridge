@@ -139,6 +139,21 @@
       Inline: remind me <md-input id="reminder-days" label="Days" type="number" inline value="3"></md-input> days before.
     </p>
 
+    <!-- md-autocomplete: a list of its own, and a list that comes from a search -->
+    <h2 class="s12 title-large">md-autocomplete</h2>
+    <md-input class="s12 m6" id="fruit" label="Fruit (from a list)" value.bind="fruit" disabled.bind="isDisabled" readonly.bind="isReadonly"
+              md-autocomplete="values.bind: fruits; min-length: 0"
+              md-on-autocomplete.trigger="fruitId = $event.detail.entry.id" md-on-deselect.trigger="fruitId = null"></md-input>
+    <md-input class="s12 m6" id="city" label="City (searched, from 2 letters)" value.bind="city"
+              md-autocomplete="search.bind: findCities; min-length: 2"
+              md-on-autocomplete.trigger="cityId = $event.detail.entry.id" md-on-deselect.trigger="cityId = null"></md-input>
+    <p class="s12 m6 body-medium" id="fruit-shown">Fruit: "${fruit}", id ${fruitId ?? 'none'}</p>
+    <p class="s12 m6 body-medium" id="city-shown">City: "${city}", id ${cityId ?? 'none'}</p>
+    <div class="s12">
+      <button type="button" id="more-fruits" class="btn tonal" click.trigger="addFruits()">Replace the fruits</button>
+      <button type="button" id="clear-fruit" class="btn tonal" click.trigger="clearFruit()">Clear the fruit from code</button>
+    </div>
+
     <!-- md-select -->
     <h2 class="s12 title-large">md-select</h2>
     <div class="s12 m6" id="state-field">

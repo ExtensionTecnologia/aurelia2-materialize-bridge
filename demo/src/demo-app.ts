@@ -1,5 +1,5 @@
 import { newInstanceForScope, resolve } from "aurelia";
-import { type MdCollapsible, type MdModal, type MdSidenav, type MdTabs, MdToastService } from "aurelia2-materialize-bridge";
+import { type AutocompleteEntry, type MdCollapsible, type MdModal, type MdSidenav, type MdTabs, MdToastService } from "aurelia2-materialize-bridge";
 import { IValidationRules } from "@aurelia/validation";
 import { IValidationController } from "@aurelia/validation-html";
 import { Person } from "./person";
@@ -26,6 +26,14 @@ export class DemoApp
   // A grey rectangle, so the demo needs no image file.
   public picture: string = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23b0bec5'/%3E%3C/svg%3E";
   public isAccordion: boolean = true;
+
+  // md-autocomplete: the field keeps the text, and the events tell which entry it is.
+  public fruits: AutocompleteEntry[] = [{ id: 1, text: "Apple" }, { id: 2, text: "Apricot", description: "Stone fruit" }, { id: 3, text: "Banana" }];
+  public fruit: string = "";
+  public fruitId: string | number | null = null;
+  public city: string = "";
+  public cityId: string | number | null = null;
+  private readonly cities: string[] = ["Santos", "Santo André", "São Paulo", "São Carlos", "Salvador", "Rio de Janeiro", "Recife"];
 
   public person: Person = new Person();
   public states: string[] = ["São Paulo", "Rio de Janeiro"];
@@ -87,6 +95,29 @@ export class DemoApp
     this.person.birthDate = new Date(2026, 11, 25);
     this.person.meetingTime = "08:05";
   }
+
+  // A value changed from code is not announced by md-on-deselect: the id is cleared here too.
+  public clearFruit(): void
+  {
+    this.fruit = "";
+    this.fruitId = null;
+  }
+
+  public addFruits(): void
+  {
+    this.fruits = [{ id: 4, text: "Cherry" }, { id: 5, text: "Coconut" }];
+  }
+
+  // Stands in for a search on a server: answers after a moment, as a request would.
+  public findCities = async (text: string): Promise<AutocompleteEntry[]> =>
+  {
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    const wanted = text.toLocaleLowerCase();
+    return this.cities
+      .map((name, position) => ({ id: position + 1, text: name }))
+      .filter(entry => entry.text.toLocaleLowerCase().includes(wanted));
+  };
 
   public addState(): void
   {

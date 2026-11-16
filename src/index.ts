@@ -1,4 +1,5 @@
 import { type IContainer, Registration } from "aurelia";
+import { MdAutocomplete } from "./autocomplete/md-autocomplete";
 import { MdButton } from "./button/md-button";
 import { MdCard } from "./card/md-card";
 import { MdCheckbox } from "./checkbox/md-checkbox";
@@ -23,16 +24,16 @@ import { MdToastService } from "./toast/md-toast-service";
 import { MdTooltip } from "./tooltip/md-tooltip";
 
 export { IFieldErrorSource } from "./common/field-error-source";
-export { type DatepickerOptions, type FormSelectOptions, type TimepickerOptions } from "./common/materialize-options";
+export { type AutocompleteEntry, type DatepickerOptions, type FormSelectOptions, type TimepickerOptions } from "./common/materialize-options";
 export { IMaterializeBridgeOptions, MaterializeBridgeOptions };
 export
 {
-  MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdInput, MdModal, MdNavbar, MdPagination,
+  MdAutocomplete, MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdInput, MdModal, MdNavbar, MdPagination,
   MdProgress, MdRadio, MdSelect, MdSidenav, MdSidenavCollapse, MdSwitch, MdTabs, MdTimepicker, MdToastService, MdTooltip
 };
 
 const components = [
-  MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdInput, MdModal, MdNavbar, MdPagination,
+  MdAutocomplete, MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdInput, MdModal, MdNavbar, MdPagination,
   MdProgress, MdRadio, MdSelect, MdSidenav, MdSidenavCollapse, MdSwitch, MdTabs, MdTimepicker, MdTooltip
 ];
 

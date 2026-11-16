@@ -31,6 +31,15 @@ Requires `aurelia` 2.0.0-rc.2 and `@materializecss/materialize` 2.3.x. Materiali
 | `maxlength` | no default (was 524288, the browser's own limit) |
 | `text-area` | renders a plain `textarea` with four rows that the user can resize; it does not grow by itself |
 
+## md-autocomplete
+
+- Still an attribute on an `<md-input>` or on an `<input>`: `<md-input label="Fruit" value.bind="fruit" md-autocomplete="values.bind: fruits">`.
+- **`values` is a list now**, as in Materialize 2: `[{ id: 1, text: "Apple", image: "apple.png" }]`, where it was `{ "Apple": "apple.png", "Banana": null }`. The old object is still accepted, with a warning on the console; each text becomes its own `id`.
+- **`limit` is removed.** Materialize 2 has no such option, and the bridge does not cut the list it is given. Give fewer entries, or use `search` and let the function decide how many to return.
+- `search` is new: a function that finds the entries for the typed text, for a search on a server.
+- `md-on-autocomplete` is kept, and still means that the user chose an entry. `$event.detail.text` is kept; `$event.detail.entry` is new and has the `id`.
+- `md-on-deselect` is new: the user edited the field after choosing, and the text is no longer the one of the entry.
+
 ## md-select
 
 - Still an attribute on a native `<select>`: `<select md-select="label: State" value.bind="state">`.
