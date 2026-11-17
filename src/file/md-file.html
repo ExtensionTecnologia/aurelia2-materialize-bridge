@@ -1,0 +1,16 @@
+<!-- input-field gives the file-field the position: relative that Materialize 2.3.3 left out: without it the
+     invisible file input covers the whole page. The file input covers the button and the box, so a click
+     anywhere on the field opens the browser's window, and files can be dropped on it. -->
+<div class="file-field input-field">
+  <div class="btn tonal ${disabled ? 'disabled' : ''}">
+    <span>${caption}</span>
+    <input ref="fileInput" type="file" aria-label.bind="label" accept.attr="accept" multiple.bind="multiple"
+           disabled.bind="disabled || readonly" change.trigger="onChange()">
+  </div>
+  <fieldset class="form-field" disabled.bind="disabled">
+    <legend>${label}</legend>
+    <input class="file-path" type="text" tabindex="-1" aria-hidden="true" value.bind="names" readonly disabled.bind="disabled">
+  </fieldset>
+</div>
+<!-- Outside the fieldset: inside it the message would sit in the outlined box. -->
+<p class="label-medium error-text m-0" repeat.for="error of fieldErrors.messages">${error}</p>

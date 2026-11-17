@@ -58,6 +58,16 @@ Requires `aurelia` 2.0.0-rc.2 and `@materializecss/materialize` 2.3.x. Materiali
 
 No changes.
 
+## md-file
+
+- **`files` is a bindable now**, a list of `File` bound both ways, where the original kept a `FileList` inside the component. Set it to `[]` or `null` to clear the choice.
+- **`label-value` is removed.** The box always shows the names of the chosen files.
+- `label` is new: the label on the outline of the box. `accept` is new.
+- The box is an outlined field, `fieldset.form-field`, like the other fields. The button is `btn tonal`, where it was `btn accent`.
+- `md-on-change` is kept, with `$event.detail.files`, and is now fired on the `md-file` element. The bridge's own `change` event is gone: the browser's `change` of the inside input still reaches the element, without `detail`.
+- `readonly` now keeps any other file from being chosen. It did nothing before, because a file input has no read-only state.
+- Shows its validation messages, like the other fields.
+
 ## md-datepicker and md-timepicker
 
 - Options not given on the component come from `MaterializeBridge.customize()` (`options.datepicker`, `options.timepicker`), then from Materialize. The display is `modal` unless you set `displayPlugin`.

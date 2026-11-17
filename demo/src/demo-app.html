@@ -188,6 +188,17 @@
       <span id="picker-values" class="body-medium">${person.birthDate.toDateString()} | ${person.contractDate.toDateString()} | ${person.meetingTime} | ${person.alarmTime} | last selected: ${lastSelected}</span>
     </div>
 
+    <!-- md-file -->
+    <h2 class="s12 title-large">md-file</h2>
+    <md-file class="s12 m6" id="person-document" label="Document (PDF, required)" caption="Choose" accept=".pdf" files.bind="person.document & validate"
+             disabled.bind="isDisabled" readonly.bind="isReadonly" md-on-change.trigger="log('file chosen: ' + $event.detail.files.length)"></md-file>
+    <md-file class="s12 m6 l4" id="person-photos" label="Photos" caption="Photos" accept="image/*" multiple files.bind="person.photos"
+             disabled.bind="isDisabled" readonly.bind="isReadonly"></md-file>
+    <div class="s12">
+      <button type="button" id="clear-files" class="btn tonal" click.trigger="clearFiles()">Clear the files from code</button>
+      <span id="files-shown" class="body-medium">Document: ${person.document?.length ?? 0} file(s) | Photos: ${person.photos?.length ?? 0} file(s)</span>
+    </div>
+
     <!-- md-radio -->
     <h2 class="s12 title-large">md-radio</h2>
     <div class="s12" id="plan-field">

@@ -16,6 +16,8 @@ export class Person
   public plan: string = "monthly";
   public receivesEmails: boolean = false;
   public acceptsTerms: boolean = false;
+  public document: File[] | null = [];
+  public photos: File[] | null = [];
 
   public static defineRules(rules: IValidationRules): void
   {
@@ -45,6 +47,9 @@ export class Person
           .withMessage("${$displayName} is required.")
       .ensure("acceptsTerms")
         .satisfies((value: boolean) => value)
-          .withMessage("The terms must be accepted.");
+          .withMessage("The terms must be accepted.")
+      .ensure("document")
+        .satisfies((files: File[] | null) => files != null && files.length > 0)
+          .withMessage("Attach the document.");
   }
 }

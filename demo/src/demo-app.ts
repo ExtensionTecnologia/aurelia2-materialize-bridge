@@ -68,6 +68,12 @@ export class DemoApp
     this.savedMessage = "";
   }
 
+  public clearFiles(): void
+  {
+    this.person.document = [];
+    this.person.photos = null;
+  }
+
   public chooseRio(): void
   {
     this.person.state = "Rio de Janeiro";

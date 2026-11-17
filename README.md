@@ -8,7 +8,7 @@ This is the successor of [aurelia-materialize-bridge](https://github.com/aurelia
 
 ## Status
 
-Version 0.2.0, an early release. It is published on npm under the tag `next`, so it has to be asked for by that name (see [Install](#install)).
+Version 0.3.0, an early release. It is published on npm under the tag `next`, so it has to be asked for by that name (see [Install](#install)).
 
 It works with exactly these versions, and nothing else has been tried:
 
@@ -208,7 +208,7 @@ Two things that are easy to miss:
 - **Put `novalidate` on the form.** Without it, the browser checks `type="email"` and `required` by itself and stops the submit before your rules run, so your messages never appear.
 - **A valid field has no special colour.** Material Design 3 has an error state but no success state.
 
-Fields that show a message: `md-input`, `md-select`, `md-datepicker`, `md-timepicker`, `md-checkbox`, `md-switch`. `md-radio` does not, because the message would repeat on every radio of the group; show it once beside the group.
+Fields that show a message: `md-input`, `md-file`, `md-select`, `md-datepicker`, `md-timepicker`, `md-checkbox`, `md-switch`. `md-radio` does not, because the message would repeat on every radio of the group; show it once beside the group.
 
 To hide the text and keep only the red outline, set `show-errortext.bind="false"` on the field.
 
@@ -421,6 +421,31 @@ A field that opens a clock. The value is a text, as the picker writes it: `"14:3
 Also accepted, as in Materialize: `duration`, `container`, `from-now`, `vibrate`.
 
 It announces `change`, and `md-on-select` (`$event.detail.hour` and `.minute`). From code, `open()` opens the clock.
+
+### md-file
+
+A field that chooses files: a button and, beside it, the names of the chosen files. A click anywhere on the field opens the browser's window, and files can be dropped on it.
+
+```html
+<md-file label="Contract" accept=".pdf" files.bind="request.contract & validate"></md-file>
+<md-file class="s12 m6" label="Photos" caption="Photos" accept="image/*" multiple files.bind="request.photos"></md-file>
+```
+
+| Option | What it does |
+|---|---|
+| `files` | The chosen files, as a list of `File`. Bound both ways: set it to `[]` or `null` to clear the choice, for example after sending them. |
+| `label` | The label on the outline of the box. |
+| `caption` | The text of the button. `File` when not given. |
+| `accept` | The kinds of file the browser's window offers, as in `<input type="file">`: `.pdf`, `image/*`, `.png,.jpg`. The user can still choose any file, so check them before sending. |
+| `multiple` | Lets the user choose more than one file. |
+| `disabled` | As on an `<input>`. |
+| `readonly` | The names stay on show and the field looks as usual, but nothing else can be chosen. |
+
+It announces `md-on-change` (`$event.detail.files`) when the user chooses. Clearing the choice from code is not announced.
+
+The button and the box need about 170 pixels side by side. In a narrow column, give the field the whole line on small screens: `class="s12 m6 l4"`.
+
+A rule for "a file is required" checks the list: `.satisfies((files: File[] | null) => files != null && files.length > 0)`.
 
 ## Components with behaviour
 
@@ -751,7 +776,7 @@ Aurelia
 - In `md-autocomplete`, a user who leaves the field and comes back to it in less than a quarter of a second, while the list is still closing, gets no list until leaving the field again.
 - In `md-autocomplete`, choosing with a click takes the cursor out of the field.
 
-**Not available yet,** compared with the original bridge: chips, carousel, collection, file input, range, and others.
+**Not available yet,** compared with the original bridge: chips, carousel, collection, range, and others.
 
 **Links inside a page, with `@aurelia/router`.** In a screen reached through the router, the router takes every `<a href>` for a route, also `href="#section"`. `md-tabs` takes care of its own links. For a link of your own that only moves inside the page, add `external`: `<a href="#section" external>`.
 

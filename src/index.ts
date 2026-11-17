@@ -8,6 +8,7 @@ import { IMaterializeBridgeOptions, MaterializeBridgeOptions } from "./configura
 import { MdDatepicker } from "./datepicker/md-datepicker";
 import { MdDropdown } from "./dropdown/md-dropdown";
 import { MdDropdownElement } from "./dropdown/md-dropdown-element";
+import { MdFile } from "./file/md-file";
 import { MdInput } from "./input/md-input";
 import { MdModal } from "./modal/md-modal";
 import { MdNavbar } from "./navbar/md-navbar";
@@ -28,12 +29,12 @@ export { type AutocompleteEntry, type DatepickerOptions, type FormSelectOptions,
 export { IMaterializeBridgeOptions, MaterializeBridgeOptions };
 export
 {
-  MdAutocomplete, MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdInput, MdModal, MdNavbar, MdPagination,
+  MdAutocomplete, MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdFile, MdInput, MdModal, MdNavbar, MdPagination,
   MdProgress, MdRadio, MdSelect, MdSidenav, MdSidenavCollapse, MdSwitch, MdTabs, MdTimepicker, MdToastService, MdTooltip
 };
 
 const components = [
-  MdAutocomplete, MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdInput, MdModal, MdNavbar, MdPagination,
+  MdAutocomplete, MdButton, MdCard, MdCheckbox, MdCollapsible, MdDatepicker, MdDropdown, MdDropdownElement, MdFile, MdInput, MdModal, MdNavbar, MdPagination,
   MdProgress, MdRadio, MdSelect, MdSidenav, MdSidenavCollapse, MdSwitch, MdTabs, MdTimepicker, MdTooltip
 ];
 

@@ -1,0 +1,32 @@
+md-file {
+  display: block;
+}
+
+/* The button and the outlined box on one line, and the box narrows with the column of the grid. */
+md-file .file-field {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: end;
+}
+
+/* The outlined box is positioned too, and would sit over the invisible file input: a click on it would do nothing. */
+md-file input[type=file] {
+  z-index: 1;
+}
+
+/* The file input is invisible: the button shows where the keyboard is. */
+md-file .btn:has(input[type=file]:focus-visible) {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+/* Read-only: the field looks normal, but nothing can be chosen. */
+md-file input[type=file]:disabled {
+  cursor: default;
+}
+
+/* Material Design 3 error state: outline and label in the error colour. */
+md-file.invalid fieldset.form-field {
+  --mw-idle-color: var(--md-sys-color-error);
+  --mw-hover-color: var(--md-sys-color-on-error-container);
+  --mw-focus-color: var(--md-sys-color-error);
+}
