@@ -254,12 +254,14 @@ public fruits: AutocompleteEntry[] = [
 ];
 ```
 
-Only `id` is required in an entry; without `text`, the `id` is what is shown. The type `AutocompleteEntry` comes from the bridge.
+Only `id` is required in an entry; without `text`, the `id` is what is shown. When two entries can have the same `text` (two customers with the same name), give each a `description`, or the user sees two equal lines. The type `AutocompleteEntry` comes from the bridge.
+
+**What is typed is looked for in the `text` and also in the `id`** of each entry: that is Materialize's own filter. With numbers as `id`, typing `1` offers the entries whose `id` has a 1. To look only in the names, or in any other way, filter in a `search` function.
 
 | Option | What it does |
 |---|---|
 | `values` | The entries to offer. Replace the list and the new entries are offered at once. |
-| `search` | A function that receives the typed text and returns the entries, at once or as a `Promise`. Use it instead of `values` to search on a server. |
+| `search` | A function that receives the typed text and returns the entries, at once or as a `Promise`. Use it instead of `values` to search on a server, or to filter a list of your own in your own way. |
 | `min-length` | How many characters before the list appears. `1` when not given; `0` shows the whole list on a click. |
 
 **The field keeps the text, not the entry.** `value` is what the user typed or chose, and a text that is not in the list is accepted. To know which entry it is, for its `id`, listen to the two events:
